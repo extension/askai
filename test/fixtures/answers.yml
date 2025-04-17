@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  question: one
+  source: one
+  text: MyText
+  html_response: MyText
+  author: MyString
+  display_order: 1
+  user_submitted: false
+  submitted_by: MyString
+  approved: false
+
+two:
+  question: two
+  source: two
+  text: MyText
+  html_response: MyText
+  author: MyString
+  display_order: 1
+  user_submitted: false
+  submitted_by: MyString
+  approved: false

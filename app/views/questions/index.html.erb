@@ -1,0 +1,25 @@
+<h1>Imported Questions</h1>
+
+<% @questions.each do |question| %>
+  <div style="border: 1px solid #ccc; padding: 1em; margin-bottom: 1em;">
+    <h3><%= question.title %></h3>
+    <p><strong>State:</strong> <%= question.state %> | <strong>County:</strong> <%= question.county %></p>
+    <p>
+      <strong>FAQ ID:</strong>
+      <a href="https://ask.extension.org/kb/faq.php?id=<%= question.faq_id %>" target="_blank" rel="noopener">
+        FAQ #<%= question.faq_id %>
+      </a>
+    </p>
+    <% if question.image_present %>
+  <p style="color: darkred; font-weight: bold;">📸 Image(s) attached</p>
+<% end %>
+
+    <p><strong>Question:</strong></p>
+    <p><%= simple_format(question.text) %></p>
+    <hr>
+    <p><strong>Full Conversation:</strong></p>
+    <div style="background: #f9f9f9; padding: 0.5em;">
+      <%= raw(question.full_conversation_thread) %>
+    </div>
+  </div>
+<% end %>

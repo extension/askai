@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  faq_id: 1
+  title: MyString
+  text: MyText
+  state: MyString
+  county: MyString
+  original_asked_at: 2025-04-16 11:12:55
+
+two:
+  faq_id: 1
+  title: MyString
+  text: MyText
+  state: MyString
+  county: MyString
+  original_asked_at: 2025-04-16 11:12:55

@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  question: one
+  answer: one
+  voter_session_id: MyString
+  guessed_answer_id: 1
+  guessed_human_correctly: false
+
+two:
+  question: two
+  answer: two
+  voter_session_id: MyString
+  guessed_answer_id: 1
+  guessed_human_correctly: false
