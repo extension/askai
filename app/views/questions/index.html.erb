@@ -40,9 +40,11 @@
     <!-- Admin Controls -->
     <div style="margin-top: 1em;">
       <%= link_to "✏️ Edit", edit_question_path(question), style: "margin-right: 1em;" %>
-
-      <% unless question.status == "approved" %>
+      <!-- Disable button until edited -->
+      <% if question.status != "approved" && question.reviewed_and_edited_answer.present? %>
         <%= button_to "✅ Approve", approve_question_path(question), method: :patch, form: { style: "display: inline;" } %>
+      <% else %>
+        <%= button_to "✅ Approve", "#", disabled: true, class: "btn btn-secondary", form: { style: "display: inline;" }, title: "You must review and edit the answer before approving." %>
       <% end %>
 
       <% unless question.status == "rejected" %>
