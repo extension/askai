@@ -8,3 +8,25 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+
+/* Public question view */
+
+.question-card {
+  padding: 1rem;
+  margin-bottom: 2rem;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.answer-section {
+  display: flex;
+  gap: 2rem;
+}
+
+.answer-section > div {
+  flex: 1;
+  background: #f9f9f9;
+  padding: 1rem;
+  border-radius: 4px;
+}

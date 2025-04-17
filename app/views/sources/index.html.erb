@@ -1,0 +1,26 @@
+<h1>Sources</h1>
+<%= link_to "New Source", new_source_path, class: "button" %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Provider</th>
+      <th>Is Human?</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @sources.each do |source| %>
+      <tr>
+        <td><%= source.name %></td>
+        <td><%= source.provider %></td>
+        <td><%= source.is_human ? "Yes" : "No" %></td>
+        <td>
+          <%= link_to "Edit", edit_source_path(source) %> |
+          <%= link_to "Delete", source_path(source), method: :delete, data: { confirm: "Are you sure?" } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

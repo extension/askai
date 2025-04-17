@@ -34,11 +34,20 @@
 
     <% if user_signed_in? %>
       Logged in as <%= current_user.email %> |
-      <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
+      <%= link_to "Logout", destroy_user_session_path, data: { turbo_method: :delete } %>
     <% else %>
       <%= link_to 'Login', new_user_session_path %>
     <% end %>
 
+    <% if current_user&.admin? %>
+      <nav style="margin-bottom: 1em; padding: 1em; background: #f4f4f4; border: 1px solid #ddd;">
+        <strong>Filter Questions:</strong>
+        <%= link_to "All", questions_path, style: "margin-right: 1em;" %>
+        <%= link_to "Approved", questions_path(status: "approved"), style: "margin-right: 1em;" %>
+        <%= link_to "Rejected", questions_path(status: "rejected"), style: "margin-right: 1em;" %>
+        <%= link_to "Pending", questions_path(status: "draft"), style: "margin-right: 1em;" %>
+      </nav>
+    <% end %>
 
     <%= yield %>
     

@@ -1,0 +1,24 @@
+<h1>Ask AI: Human vs AI</h1>
+
+<% @questions.each do |question| %>
+  <div class="question-card">
+    <h2><%= question.title %></h2>
+    <p><strong>Question:</strong> <%= question.title %></p>
+
+    <div class="answer-section">
+      <div class="human-answer">
+      <h3>Human Response</h3>
+      <p><%= question.reviewed_and_edited_answer.presence || "No human answer available yet." %></p>
+    </div>
+
+      <div class="ai-answer">
+        <h3>AI Response</h3>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae sapien ut libero venenatis faucibus.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <hr>
+<% end %>
