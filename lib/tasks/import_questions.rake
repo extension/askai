@@ -1,27 +1,33 @@
 # lib/tasks/import_questions.rake
-def scrub_email_reply_headers(html)
+def scrub_data(html, author_name)
   cleaned = html.dup
 
-  # Remove <div> blocks containing b-tagged email headers
+  # Remove <div> blocks with email headers
   patterns = [
     /<div[^>]*>.*?<b>From:.*?<\/div>/im,
     /<div[^>]*>.*?<b>Sent:.*?<\/div>/im,
     /<div[^>]*>.*?<b>To:.*?<\/div>/im,
     /<div[^>]*>.*?<b>Subject:.*?<\/div>/im
   ]
+  patterns.each { |pattern| cleaned.gsub!(pattern, "") }
 
-  patterns.each do |pattern|
-    cleaned.gsub!(pattern, "")
-  end
+  # Remove mailto: links entirely (strip the <a href="mailto:...">...</a> block)
+  cleaned.gsub!(/<a\s+href=["']mailto:[^>]+>(.*?)<\/a>/i, '[email removed]')
 
-  # Strip bare email addresses (inside angle brackets, or inline)
+  # Strip bare email addresses
   cleaned.gsub!(/\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i, '[email removed]')
 
-  # Strip mailto: links
-  cleaned.gsub!(/mailto:[^"'\s<>]*/i, '[email removed]')
+  # Strip US-style phone numbers
+  cleaned.gsub!(/(\+1\s*)?(\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4})/, '[phone removed]')
+
+  # Strip closing signature that includes the author’s name
+  if author_name.present?
+    cleaned.gsub!(/(<br\s*\/?>\s*)?(Thanks|Thank you|Kind regards|Sincerely)?\s*(<br\s*\/?>\s*)?#{Regexp.escape(author_name)}/i, "")
+  end
 
   cleaned.strip
 end
+
 
 namespace :import do
   desc "Import AskAI question data from JSON in root dir. Usage: rails 'import:questions[10]'"
@@ -45,8 +51,8 @@ namespace :import do
 
     if entry["answer"]
       entry["answer"].each_with_index do |(_, answer_data), i|
-        cleaned_response = scrub_email_reply_headers(answer_data["response"])
-        full_thread += "<strong>Answer ##{i + 1} (#{answer_data["author"]}):</strong><br>\n#{cleaned_response}<br><br>"
+        cleaned_response = scrub_data(answer_data["response"], answer_data["author"])
+        full_thread += "<strong>Answer ##{i + 1}:</strong><br>\n#{cleaned_response}<br><br>"
       end
     end
 
