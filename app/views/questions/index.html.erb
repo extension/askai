@@ -23,10 +23,19 @@
     <p><%= simple_format(question.text) %></p>
 
     <hr>
-    <p><strong>Full Conversation:</strong></p>
-    <div style="background: #f9f9f9; padding: 0.5em;">
-      <%= raw(question.full_conversation_thread) %>
-    </div>
+    <p><strong>Displayed Conversation:</strong></p>
+
+    <% if question.reviewed_and_edited_answer.present? %>
+      <p style="color: green; font-weight: bold;">✏️ Showing reviewed & edited version</p>
+      <div style="background: #eefbe9; padding: 0.5em; border-left: 4px solid #64aa52;">
+        <%= raw(question.reviewed_and_edited_answer) %>
+      </div>
+    <% else %>
+      <p style="color: #999;">📄 Showing original imported conversation</p>
+      <div style="background: #f9f9f9; padding: 0.5em; border-left: 4px solid #ccc;">
+        <%= raw(question.full_conversation_thread) %>
+      </div>
+    <% end %>
 
     <!-- Admin Controls -->
     <div style="margin-top: 1em;">

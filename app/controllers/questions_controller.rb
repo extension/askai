@@ -8,6 +8,11 @@ class QuestionsController < ApplicationController
 
   def edit
     @question = Question.find(params[:id])
+
+    # Pre-fill edited answer if it's blank
+    if @question.reviewed_and_edited_answer.blank?
+      @question.reviewed_and_edited_answer = @question.full_conversation_thread
+    end
   end
 
   def update
@@ -34,7 +39,7 @@ class QuestionsController < ApplicationController
   private
 
   def question_params
-    params.require(:question).permit(:title, :full_conversation_thread)
+    params.require(:question).permit(:title, :reviewed_and_edited_answer)
   end
 
   def require_admin

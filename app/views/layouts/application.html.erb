@@ -8,6 +8,11 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <!-- Trumbowyg WYSIWYG Editor -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/trumbowyg@2.27.3/dist/ui/trumbowyg.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/trumbowyg@2.27.3/dist/trumbowyg.min.js"></script>
+
     <%= yield :head %>
 
     <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
@@ -36,5 +41,14 @@
 
 
     <%= yield %>
+    
+    <script>
+      document.addEventListener("turbo:load", function() {
+        const $editor = $('#conversation-editor');
+        if (!$editor.hasClass('trumbowyg-editor')) {
+          $editor.trumbowyg();
+        }
+      });
+    </script>
   </body>
 </html>
