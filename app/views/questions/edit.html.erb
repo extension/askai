@@ -1,0 +1,17 @@
+<h1>Edit Question</h1>
+
+<%= form_with(model: @question, local: true) do |form| %>
+  <div>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+  </div>
+
+  <div style="margin-top: 1em;">
+    <%= form.label :full_conversation_thread, "Full Conversation Thread (HTML OK)" %><br>
+    <%= form.text_area :full_conversation_thread, rows: 12 %>
+  </div>
+
+  <div style="margin-top: 1em;">
+    <%= form.submit "Update Question" %>
+  </div>
+<% end %>
