@@ -49,14 +49,25 @@ namespace :import do
     data.first(limit).each_with_index do |entry, index|
       full_thread = "<strong>Question:</strong><br>\n#{entry["question"]}<br><br>"
 
-    if entry["answer"]
-      entry["answer"].each_with_index do |(_, answer_data), i|
-        cleaned_response = scrub_data(answer_data["response"], answer_data["author"])
-        full_thread += "<strong>Answer ##{i + 1}:</strong><br>\n#{cleaned_response}<br><br>"
+      if entry["answer"]
+        answers_array = if entry["answer"].is_a?(Hash)
+                          entry["answer"].values
+                        elsif entry["answer"].is_a?(Array)
+                          entry["answer"]
+                        else
+                          []
+                        end
+
+        answers_array.each_with_index do |answer_data, i|
+          # Skip if no response text
+          next unless answer_data.is_a?(Hash) && answer_data["response"].present?
+
+          author = answer_data["author"] || "Unknown"
+          cleaned_response = scrub_data(answer_data["response"], author)
+          full_thread += "<strong>Answer ##{i + 1}:</strong><br>\n#{cleaned_response}<br><br>"
+        end
       end
-    end
-
-
+      
       question = Question.find_or_initialize_by(faq_id: entry["faq-id"])
       question.title = entry["title"]
       question.text = entry["question"]
