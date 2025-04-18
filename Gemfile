@@ -43,6 +43,9 @@ gem 'kaminari'
 #authentication
 gem 'devise'
 
+#openai access
+gem 'ruby-openai'
+
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -68,4 +71,6 @@ group :development, :test do
   gem 'capybara'
   gem 'selenium-webdriver' # For JS/browser tests
   gem 'webdrivers'         # Automatically downloads the right browser driver
+  gem "dotenv-rails", "~> 3.1"
 end
+

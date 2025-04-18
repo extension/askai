@@ -6,7 +6,7 @@ class Answer < ApplicationRecord
     return if question.reviewed_and_edited_answer.blank?
     return if question.answers.exists?(source_id: source.id)
 
-    # Human-reviewed answer
+    # Create human-reviewed answer
     question.answers.create!(
       source: source,
       text: question.reviewed_and_edited_answer,
@@ -18,35 +18,41 @@ class Answer < ApplicationRecord
 
     return unless ai_source && !question.answers.exists?(source_id: ai_source.id)
 
-    # === Replace this with actual OpenAI call when ready ===
-    ai_answer_text = <<~TEXT
-      This is a placeholder AI-generated response for development purposes. 
-      In production, this would be replaced by a real response from GPT-4 or another AI model.
-    TEXT
+    # === GPT-4 AI answer generation ===
+    begin
+      client = OpenAI::Client.new
+      response = client.chat(
+        parameters: {
+          model: "gpt-4",
+          messages: [
+            { role: "system", content: system_prompt },
+            { role: "user", content: question[:text] }
+          ],
+          temperature: 0.7
+        }
+      )
 
-    # Uncomment when ready to use real API
-    # response = OpenAI::Client.new.chat(
-    #   parameters: {
-    #     model: "gpt-4",
-    #     messages: [
-    #       { role: "system", content: "You are a helpful Cooperative Extension agent." },
-    #       { role: "user", content: question.question }
-    #     ],
-    #     temperature: 0.7
-    #   }
-    # )
-    # ai_answer_text = response.dig("choices", 0, "message", "content")
+      ai_answer_text = response.dig("choices", 0, "message", "content")&.strip
 
-    question.answers.create!(
-      source: ai_source,
-      text: ai_answer_text.strip,
-      author: "System (AI-generated)",
-      approved: true,
-      user_submitted: false,
-      display_order: 2
-    )
+      if ai_answer_text.present?
+        question.answers.create!(
+          source: ai_source,
+          text: ai_answer_text,
+          author: "System (AI-generated)",
+          approved: true,
+          user_submitted: false,
+          display_order: 2
+        )
+      end
+    rescue => e
+      Rails.logger.error("[Answer] AI generation failed for Question #{question.id}: #{e.message}")
+    end
   end
-  
+
+  def self.system_prompt
+    "You are a helpful Cooperative Extension agent who provides science-based, practical, and regionally-relevant advice to the public."
+  end
+
   def source_is_human?
     source&.is_human
   end

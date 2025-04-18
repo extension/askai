@@ -35,3 +35,6 @@
 
 # Ignore AE seed questions file
 questions.json
+
+#ignore dotenv file
+.env
