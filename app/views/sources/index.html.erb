@@ -18,7 +18,7 @@
         <td><%= source.is_human ? "Yes" : "No" %></td>
         <td>
           <%= link_to "Edit", edit_source_path(source) %> |
-          <%= link_to "Delete", source_path(source), method: :delete, data: { confirm: "Are you sure?" } %>
+          <%= button_to "Delete", source_path(source), method: :delete, data: { confirm: "Are you sure?" } %>
         </td>
       </tr>
     <% end %>
