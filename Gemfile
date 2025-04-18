@@ -63,8 +63,9 @@ group :development do
   gem "web-console"
 end
 
-group :test do
-  # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
-  gem "capybara"
-  gem "selenium-webdriver"
+group :development, :test do
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'selenium-webdriver' # For JS/browser tests
+  gem 'webdrivers'         # Automatically downloads the right browser driver
 end
