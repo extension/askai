@@ -22,9 +22,27 @@ class QuestionsController < ApplicationController
     end
   end
 
+  # def update
+  #   @question = Question.find(params[:id])
+  #   if @question.update(question_params)
+  #     redirect_to questions_path, notice: "Question updated."
+  #   else
+  #     render :edit
+  #   end
+  # end
   def update
     @question = Question.find(params[:id])
+
     if @question.update(question_params)
+      # Sync the answer if it exists
+      if @question.status == "approved" && @question.answers.any?
+        @question.answers.each do |answer|
+          answer.update!(
+            text: @question.reviewed_and_edited_answer
+          )
+        end
+      end
+
       redirect_to questions_path, notice: "Question updated."
     else
       render :edit
