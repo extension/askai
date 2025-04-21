@@ -1,4 +1,4 @@
-# lib/tasks/import_questions.rake
+# run with rails "import:questions[500]" or drop in whatever number of questions you want to import
 def scrub_data(html, author_name)
   cleaned = html.dup
 

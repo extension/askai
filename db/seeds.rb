@@ -1,4 +1,4 @@
-# db/seeds.rb
+# run with rails db:seed
 
 # Seed sources
 Source.find_or_create_by!(
