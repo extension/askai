@@ -32,4 +32,19 @@ Each vote contributes to an evolving leaderboard that ranks AI models and human 
 
 - Focus on **data quality** by curating one clear answer per question  
 - Maintain **transparency and neutrality** by anonymizing all sources in the public interface  
-- Encourage **public engagement** with Extension knowledge while exploring the role of generative AI in agricultural education and support  
+- Encourage **public engagement** with Extension knowledge while exploring the role of generative AI in agricultural education and support
+
+## ⚙️ Setup Instructions
+
+To set up the application locally for development:
+
+1. Install dependencies:
+
+   ```bash
+   bundle install
+   yarn install
+	 rails db:create
+	 rails db:migrate
+   -run import_question.rake to import Ask Extension questions (contact Mark Locklear for seed data)
+   -run db:seed to create sources and admin user
+   -run rails dev:reset to reset your database
