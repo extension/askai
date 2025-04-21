@@ -47,7 +47,7 @@ namespace :import do
     puts "📥 Importing up to #{limit} questions..."
 
     data.first(limit).each_with_index do |entry, index|
-      full_thread = "<strong>Question:</strong><br>\n#{entry["question"]}<br><br>"
+      full_thread = ""
 
       if entry["answer"]
         answers_array = if entry["answer"].is_a?(Hash)
