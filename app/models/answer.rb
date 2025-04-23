@@ -18,7 +18,11 @@ class Answer < ApplicationRecord
 
     # Queue async job for AI answer
     if ai_source && !question.answers.exists?(source_id: ai_source.id)
-      GenerateAiAnswerJob.perform_later(question.id, ai_source.id)
+      human_answer = question.answers.where.not(author: 'System (AI-generated)').last
+      #getting length of human answer and passing it to AI so the lengths are similar
+      desired_length = (human_answer.text.length / 7.0).round
+      puts "desired_length is:" + desired_length.to_s
+      GenerateAiAnswerJob.perform_later(question.id, ai_source.id, 'openai', desired_length)
     end
   end
 

@@ -1,6 +1,6 @@
 module AiProviders
   class OpenaiProvider
-    def self.generate_answer(prompt:, model: "gpt-4", system_prompt: Answer.system_prompt)
+    def self.generate_answer(prompt:, model: "gpt-4", system_prompt: Answer.system_prompt, max_tokens: nil)
       client = OpenAI::Client.new
       response = client.chat(
         parameters: {
@@ -9,8 +9,9 @@ module AiProviders
             { role: "system", content: system_prompt },
             { role: "user", content: prompt }
           ],
-          temperature: 0.7
-        }
+          temperature: 0.7,
+          max_tokens: max_tokens
+        }.compact # This ensures nil values are not sent
       )
       response.dig("choices", 0, "message", "content")&.strip
     end

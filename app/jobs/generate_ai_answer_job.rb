@@ -1,7 +1,7 @@
 class GenerateAiAnswerJob < ApplicationJob
   queue_as :default
 
-  def perform(question_id, source_id, model_provider = "openai")
+  def perform(question_id, source_id, model_provider = "openai", desired_length = nil)
     question = Question.find_by(id: question_id)
     return unless question
 
@@ -14,7 +14,8 @@ class GenerateAiAnswerJob < ApplicationJob
                  raise "Unknown AI provider: #{model_provider}"
                end
 
-    ai_text = provider.generate_answer(prompt: question.text)
+    # ai_text = provider.generate_answer(prompt: question.text)
+    ai_text = provider.generate_answer(prompt: question.text, max_tokens: desired_length)
 
     if ai_text.present?
       question.answers.create!(
