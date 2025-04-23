@@ -127,6 +127,7 @@ GEM
       multipart-post (~> 2.0)
     faraday-net_http (3.4.0)
       net-http (>= 0.5.0)
+    foreman (0.88.1)
     fugit (1.11.1)
       et-orbi (~> 1, >= 1.2.11)
       raabro (~> 1.4)
@@ -436,6 +437,7 @@ DEPENDENCIES
   debug
   devise
   dotenv-rails (~> 3.1)
+  foreman
   importmap-rails
   jbuilder
   kamal
