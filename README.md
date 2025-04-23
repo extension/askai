@@ -45,6 +45,7 @@ To set up the application locally for development:
    yarn install
 	 rails db:create
 	 rails db:migrate
-   -run import_question.rake to import Ask Extension questions (contact Mark Locklear for seed data)
+   -run rails "import:questions[1000]"  to import Ask Extension questions (contact Mark Locklear for full question set); pass the number of questions you would like to import
    -run db:seed to create sources and admin user
    -run rails dev:reset to reset your database
+   -run bundle exec sidekiq to start sidekiq(used during ai answer generation)
