@@ -16,7 +16,7 @@
 
       <div class="ai-answer">
         <h3>AI Response (<%= ai_answer&.source&.name %>)</h3>
-        <p><%= ai_answer&.text || "No AI answer available." %></p>
+        <p><%= simple_format(ai_answer&.text || "No AI answer available.") %></p>
       </div>
     </div>
   </div>
