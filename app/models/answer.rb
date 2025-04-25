@@ -20,14 +20,15 @@ class Answer < ApplicationRecord
     if ai_source && !question.answers.exists?(source_id: ai_source.id)
       human_answer = question.answers.where.not(author: 'System (AI-generated)').last
       #getting length of human answer and passing it to AI so the lengths are similar
-      desired_length = (human_answer.text.length / 7.0).round
-      puts "desired_length is:" + desired_length.to_s
+      #raise the number below to increase the length of the AI response
+      desired_length = (human_answer.text.length / 8.0).round
       GenerateAiAnswerJob.perform_later(question.id, ai_source.id, 'openai', desired_length)
     end
   end
 
   def self.system_prompt
-    "You are a helpful Cooperative Extension agent who provides science-based, practical, and regionally-relevant advice to the public."
+    "You are a helpful Cooperative Extension agent who provides science-based, practical, and regionally-relevant advice to the public. Avoid using numbered or bulleted lists."
+    # "You are a helpful expert answering user questions in a conversational tone. Avoid using numbered or bulleted lists unless absolutely necessary. Write like you're speaking to a curious friend — clear, friendly, and natural."
   end
 
   def source_is_human?
