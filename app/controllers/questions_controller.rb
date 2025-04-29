@@ -2,8 +2,8 @@ class QuestionsController < ApplicationController
   before_action :authenticate_user!
   before_action :require_admin
 
-  skip_before_action :authenticate_user!, only: [:public_index]
-  skip_before_action :require_admin, only: [:public_index]
+  skip_before_action :authenticate_user!, only: [:index]
+  skip_before_action :require_admin, only: [:index]
 
   def index
     @questions = Question.order(created_at: :desc)
@@ -46,7 +46,7 @@ class QuestionsController < ApplicationController
     @question.update!(status: 'approved', approved: true)
 
     human_source = Source.find_by(name: "Ask Extension Expert")
-    ai_source = Source.find_by(name: "Mockup for Testing")
+    ai_source = Source.find_by(is_human: false)
 
     Answer.promote_from_question!(
       question: @question,

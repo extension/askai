@@ -3,7 +3,12 @@
 <%= form_with(model: @question, local: true) do |form| %>
   <div>
     <%= form.label :title %><br>
-    <%= form.text_field :title %>
+    <%= form.text_field :title, size: 100 %>
+  </div>
+
+  <div style="margin-top: 1em;">
+    <h3>Original Question Text</h3>
+    <p><%= @question.text %></p> <!-- Displaying the original question text -->
   </div>
 
   <div style="margin-top: 1em;">
@@ -14,12 +19,11 @@
   <div style="margin-top: 1em;">
     <%= form.submit "Update Question" %>
   </div>
-
-  <details style="margin-top: 1em;">
-    <summary style="cursor: pointer;">🔍 View Original Conversation Thread</summary>
-    <div style="margin-top: 0.5em; padding: 1em; background: #f5f5f5; border: 1px solid #ccc;">
-      <%= raw(@question.full_conversation_thread) %>
-    </div>
-  </details>
-
 <% end %>
+
+<details style="margin-top: 1em;">
+  <summary style="cursor: pointer;">🧵 View Original Conversation Thread</summary>
+  <div style="margin-top: 0.5em; padding: 1em; background: #f5f5f5; border: 1px solid #ccc;">
+    <%= raw(@question.full_conversation_thread) %>
+  </div>
+</details>
