@@ -10,12 +10,20 @@
 
     <div class="answer-section">
       <div class="human-answer">
-        <h3>Human Response (<%= human_answer&.source&.name %>)</h3>
+        <% if current_user&.admin? %>
+          <h3>Human Response (<%= human_answer&.source&.name %>)</h3>
+        <% else %>
+          <h3>Response 1</h3>
+        <% end %>
         <p><%= strip_tags(human_answer&.text || "No human answer available.") %></p>
       </div>
 
       <div class="ai-answer">
-        <h3>AI Response (<%= ai_answer&.source&.name %>)</h3>
+        <% if current_user&.admin? %>
+          <h3>AI Response (<%= ai_answer&.source&.name %>)</h3>
+        <% else %>
+          <h3>Response 2</h3>
+        <% end %>
         <p><%= simple_format(ai_answer&.text || "No AI answer available.") %></p>
       </div>
     </div>

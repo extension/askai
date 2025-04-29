@@ -8,8 +8,8 @@ Source.find_or_create_by!(
 )
 
 Source.find_or_create_by!(
-  name: "Mockup for Testing",
-  provider: "Mockup for Testing",
+  name: "Chat GPT",
+  provider: "Chat GPT",
   is_human: false
 )
 
