@@ -1,33 +1,29 @@
-<h1>Ask AI: Human vs AI</h1>
+<h1 style="text-align: center; font-size: 2.2em; margin-bottom: 1em;">🤖 Ask AI: Human vs AI</h1>
 
 <% @question_answer_pairs.each do |question, answers| %>
-  <div class="question-card">
-    <h2><%= question.title %></h2>
-    <p><strong>Question:</strong> <%= question.try(:text) || "Missing question text" %></p>
+  <div class="question-card" style="border: 1px solid #ddd; border-radius: 12px; padding: 1.5em; margin-bottom: 2em; background: #fafafa;">
+    <p style="font-size: 1.5em; font-weight: bold; color: #333; margin-bottom: 0.25em;">Q: <%= question.try(:text) || "Missing question text" %></p>
+    <h2 style="font-size: 1.2em; color: #666; margin-bottom: 1.2em;"><%= question.title %></h2>
 
     <% human_answer = answers.find(&:source_is_human?) %>
     <% ai_answer = answers.find { |a| !a.source_is_human? } %>
 
-    <div class="answer-section">
-      <div class="human-answer">
-        <% if current_user&.admin? %>
-          <h3>Human Response (<%= human_answer&.source&.name %>)</h3>
-        <% else %>
-          <h3>Response 1</h3>
-        <% end %>
+    <div class="answer-section" style="display: flex; flex-wrap: wrap; gap: 1em;">
+      <div class="answer-box" style="flex: 1; min-width: 300px; background: #e8f4fc; border-left: 6px solid #2196F3; border-radius: 8px; padding: 1em;">
+        <h3 style="margin-top: 0;">
+          <%= current_user&.admin? ? "Human Response (#{human_answer&.source&.name})" : "Response 1" %>
+        </h3>
         <p><%= strip_tags(human_answer&.text || "No human answer available.") %></p>
+        <button style="margin-top: 1em; padding: 0.5em 1em; border: none; background-color: #2196F3; color: white; border-radius: 4px; cursor: pointer;">👍 Vote for this response</button>
       </div>
 
-      <div class="ai-answer">
-        <% if current_user&.admin? %>
-          <h3>AI Response (<%= ai_answer&.source&.name %>)</h3>
-        <% else %>
-          <h3>Response 2</h3>
-        <% end %>
+      <div class="answer-box" style="flex: 1; min-width: 300px; background: #fff3e0; border-left: 6px solid #FF9800; border-radius: 8px; padding: 1em;">
+        <h3 style="margin-top: 0;">
+          <%= current_user&.admin? ? "AI Response (#{ai_answer&.source&.name})" : "Response 2" %>
+        </h3>
         <p><%= simple_format(ai_answer&.text || "No AI answer available.") %></p>
+        <button style="margin-top: 1em; padding: 0.5em 1em; border: none; background-color: #FF9800; color: white; border-radius: 4px; cursor: pointer;">👍 Vote for this response</button>
       </div>
     </div>
   </div>
-
-  <hr>
 <% end %>
