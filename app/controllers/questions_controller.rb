@@ -46,6 +46,7 @@ class QuestionsController < ApplicationController
     @question.update!(status: 'approved', approved: true)
 
     human_source = Source.find_by(name: "Ask Extension Expert")
+    #todo: we should randomize the finder below to get a radom ai source one we have more than one
     ai_source = Source.find_by(is_human: false)
 
     Answer.promote_from_question!(
