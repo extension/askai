@@ -1,4 +1,12 @@
-<h1 style="text-align: center; font-size: 2.2em; margin-bottom: 1em;">🤖 Ask AI: Human vs AI</h1>
+<div style="display: flex; align-items: center; margin-bottom: 2em; gap: 1em; flex-wrap: wrap;">
+  <div style="flex-shrink: 0;">
+    <img src="<%= asset_path('askai_finger.png') %>" alt="Ask AI voting illustration" style="max-width: 140px; height: auto; border-radius: 8px;">
+  </div>
+  <div style="flex: 1;">
+    <h1 style="font-size: 2.2em; margin: 0;">🤖 AskAI</h1>
+    <p style="font-size: 1.1em; margin-top: 0.4em; color: #444;">Human vs AI — Can you tell who’s who?</p>
+  </div>
+</div>
 
 <% @question_answer_pairs.each do |question, answers| %>
   <div class="question-card" style="border: 1px solid #ddd; border-radius: 12px; padding: 1.5em; margin-bottom: 2em; background: #fafafa;">
