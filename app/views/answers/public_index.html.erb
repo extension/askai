@@ -4,14 +4,17 @@
   </div>
   <div style="flex: 1;">
     <h1 style="font-size: 2.2em; margin: 0;">🤖 AskAI</h1>
-    <p style="font-size: 1.1em; margin-top: 0.4em; color: #444;">Human vs AI — Can you tell who’s who?</p>
+    <p style="font-size: 1.1em; margin-top: 0.4em; color: #444;">Below you'll see two responses to an <a href="https://ask.extension.org/">Ask Extension</a>
+ question — one from a human expert, one from AI. — Which is better?</p>
   </div>
 </div>
 
 <% @question_answer_pairs.each do |question, answers| %>
+
   <div class="question-card" style="border: 1px solid #ddd; border-radius: 12px; padding: 1.5em; margin-bottom: 2em; background: #fafafa;">
+
+    <h2 style="font-size: 1.5em; color: #666; margin-bottom: 1.2em;"><%= question.title %></h2>
     <p style="font-size: 1.5em; font-weight: bold; color: #333; margin-bottom: 0.25em;">Q: <%= question.try(:text) || "Missing question text" %></p>
-    <h2 style="font-size: 1.2em; color: #666; margin-bottom: 1.2em;"><%= question.title %></h2>
 
     <% human_answer = answers.find(&:source_is_human?) %>
     <% ai_answer = answers.find { |a| !a.source_is_human? } %>
