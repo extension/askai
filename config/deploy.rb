@@ -19,6 +19,8 @@ set :keep_releases, 5
 #set due to low buck/low memory server
 set :bundle_jobs, 1
 
+append :linked_files, '.env'
+
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 

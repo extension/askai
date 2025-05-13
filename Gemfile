@@ -51,39 +51,36 @@ gem 'sidekiq'
 
 gem 'foreman'
 
+# Load environment variables in all environments
 gem 'dotenv-rails', groups: [:development, :test, :production]
 
-
-# Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
+# Use Active Storage variants
 # gem "image_processing", "~> 1.2"
 
 group :development, :test do
-  # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
+  # Debugging tools
+  gem "debug", platforms: %i[mri windows], require: "debug/prelude"
 
-  # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
+  # Security and static analysis
   gem "brakeman", require: false
-
-  # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
-end
 
-group :development do
-  # Use console on exceptions pages [https://github.com/rails/web-console]
-  gem "web-console"
-end
-
-group :development, :test do
+  # Testing and browser automation
   gem 'rspec-rails'
   gem 'capybara'
-  gem 'selenium-webdriver' # For JS/browser tests
-  gem 'webdrivers'         # Automatically downloads the right browser driver
-  gem "dotenv-rails", "~> 3.1"
+  gem 'selenium-webdriver'
+  gem 'webdrivers'
+
+  # Capistrano deployment stack
   gem 'capistrano', '~> 3.17'
   gem 'capistrano-rails'
-  # gem 'capistrano-passenger'  # Or use 'capistrano-puma'
+  # gem 'capistrano-passenger' # Or use capistrano-puma
   gem 'capistrano-rbenv'
   gem 'capistrano-postgresql' # Optional
   gem 'capistrano-puma'
 end
 
+group :development do
+  # Interactive debugging in the browser
+  gem "web-console"
+end
