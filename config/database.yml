@@ -79,11 +79,12 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-  primary: &primary_production
+    primary: &primary_production
     <<: *default
     database: ask_ai_production
-    username: ask_ai
-    password: <%= ENV["ASK_AI_DATABASE_PASSWORD"] %>
+    username: <%= ENV.fetch("DATABASE_USERNAME") %>
+    password: <%= ENV.fetch("DATABASE_PASSWORD") %>
+    host: local
   cache:
     <<: *primary_production
     database: ask_ai_production_cache
