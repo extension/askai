@@ -79,7 +79,7 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
-    primary: &primary_production
+  primary: &primary_production
     <<: *default
     database: ask_ai_production
     username: <%= ENV.fetch("DATABASE_USERNAME") %>
