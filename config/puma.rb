@@ -39,3 +39,24 @@ plugin :solid_queue if ENV["SOLID_QUEUE_IN_PUMA"]
 # Specify the PID file. Defaults to tmp/pids/server.pid in development.
 # In other environments, only set the PID file if requested.
 pidfile ENV["PIDFILE"] if ENV["PIDFILE"]
+
+#added for capistrano deploy
+# config/puma.rb
+
+directory '/home/deployer/apps/askai/current'
+rackup "/home/deployer/apps/askai/current/config.ru"
+environment 'production'
+
+pidfile "/home/deployer/apps/askai/shared/tmp/pids/puma.pid"
+state_path "/home/deployer/apps/askai/shared/tmp/pids/puma.state"
+stdout_redirect "/home/deployer/apps/askai/shared/log/puma.stdout.log", "/home/deployer/apps/askai/shared/log/puma.stderr.log", true
+
+threads 1, 5
+workers 2
+preload_app!
+
+bind "unix:///home/deployer/apps/askai/shared/tmp/sockets/puma.sock"
+
+restart_command 'bundle exec puma'
+
+plugin :tmp_restart

@@ -51,6 +51,8 @@ gem 'sidekiq'
 
 gem 'foreman'
 
+gem 'dotenv-rails', groups: [:development, :test, :production]
+
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -77,5 +79,11 @@ group :development, :test do
   gem 'selenium-webdriver' # For JS/browser tests
   gem 'webdrivers'         # Automatically downloads the right browser driver
   gem "dotenv-rails", "~> 3.1"
+  gem 'capistrano', '~> 3.17'
+  gem 'capistrano-rails'
+  # gem 'capistrano-passenger'  # Or use 'capistrano-puma'
+  gem 'capistrano-rbenv'
+  gem 'capistrano-postgresql' # Optional
+  gem 'capistrano-puma'
 end
 
