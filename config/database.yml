@@ -84,7 +84,7 @@ production:
     database: ask_ai_production
     username: <%= ENV.fetch("DATABASE_USERNAME") %>
     password: <%= ENV.fetch("DATABASE_PASSWORD") %>
-    host: local
+    host: localhost
   cache:
     <<: *primary_production
     database: ask_ai_production_cache
