@@ -78,13 +78,13 @@ test:
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
-production:
-  primary: &primary_production
+  production:
     <<: *default
     database: ask_ai_production
     username: <%= ENV.fetch("DATABASE_USERNAME") %>
     password: <%= ENV.fetch("DATABASE_PASSWORD") %>
     host: localhost
+
   cache:
     <<: *primary_production
     database: ask_ai_production_cache
