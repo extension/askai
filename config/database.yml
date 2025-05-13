@@ -78,22 +78,9 @@ test:
 # Read https://guides.rubyonrails.org/configuring.html#configuring-a-database
 # for a full overview on how database connection configuration can be specified.
 #
-  production:
-    <<: *default
-    database: ask_ai_production
-    username: <%= ENV.fetch("DATABASE_USERNAME") %>
-    password: <%= ENV.fetch("DATABASE_PASSWORD") %>
-    host: localhost
-
-  cache:
-    <<: *primary_production
-    database: ask_ai_production_cache
-    migrations_paths: db/cache_migrate
-  queue:
-    <<: *primary_production
-    database: ask_ai_production_queue
-    migrations_paths: db/queue_migrate
-  cable:
-    <<: *primary_production
-    database: ask_ai_production_cable
-    migrations_paths: db/cable_migrate
+production:
+  <<: *default
+  database: ask_ai_production
+  username: <%= ENV.fetch("DATABASE_USERNAME") %>
+  password: <%= ENV.fetch("DATABASE_PASSWORD") %>
+  host: localhost
