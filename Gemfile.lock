@@ -374,11 +374,6 @@ GEM
       logger (>= 1.6.2)
       rack (>= 3.1.0)
       redis-client (>= 0.23.2)
-    solid_cable (3.0.7)
-      actioncable (>= 7.2)
-      activejob (>= 7.2)
-      activerecord (>= 7.2)
-      railties (>= 7.2)
     solid_cache (1.0.7)
       activejob (>= 7.2)
       activerecord (>= 7.2)
@@ -472,7 +467,6 @@ DEPENDENCIES
   ruby-openai
   selenium-webdriver
   sidekiq
-  solid_cable
   solid_cache
   solid_queue
   stimulus-rails
