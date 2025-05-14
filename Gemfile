@@ -59,7 +59,7 @@ gem 'dotenv-rails', groups: [:development, :test, :production]
 
 group :development, :test do
   # Debugging tools
-  gem "debug", platforms: %i[mri windows], require: "debug/prelude"
+  # gem "debug", platforms: %i[mri windows], require: "debug/prelude"
 
   # Security and static analysis
   gem "brakeman", require: false
