@@ -7,9 +7,9 @@ set :repo_url, "git@github.com:extension/askai.git"  # <-- update this!
 # Deploy to user's home directory
 set :deploy_to, "/home/deployer/apps/#{fetch(:application)}"
 
-# Use rbenv
-set :rbenv_type, :user
-set :rbenv_ruby, '3.4.3'
+# Use rvm
+set :rvm_ruby_version, '3.4.3'
+
 
 append :linked_files, "config/master.key"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/system"

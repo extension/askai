@@ -75,7 +75,7 @@ group :development, :test do
   gem 'capistrano', '~> 3.17'
   gem 'capistrano-rails'
   # gem 'capistrano-passenger' # Or use capistrano-puma
-  gem 'capistrano-rbenv'
+  gem 'capistrano-rvm'
   gem 'capistrano-postgresql' # Optional
   gem 'capistrano-puma'
 end
