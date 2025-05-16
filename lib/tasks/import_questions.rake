@@ -32,7 +32,7 @@ end
 namespace :import do
   desc "Import AskAI question data from JSON in root dir. Usage: rails 'import:questions[10]'"
   task :questions, [:limit] => :environment do |_, args|
-    file_path = Rails.root.join("..", "shared", "questions.json")
+    file_path = "/home/deployer/apps/askai/shared/questions.json"
 
     unless File.exist?(file_path)
       puts "❌ File not found at: #{file_path}"
