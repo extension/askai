@@ -54,3 +54,7 @@ append :linked_files, '.env'
 
 # Uncomment the following to require manually verifying the host key before first deploy.
 # set :ssh_options, verify_host_key: :secure
+
+#restart puma each time you deploy
+after 'deploy:publishing', 'puma:restart'
+
