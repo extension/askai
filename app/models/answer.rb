@@ -20,8 +20,8 @@ class Answer < ApplicationRecord
     if ai_source && !question.answers.exists?(source_id: ai_source.id)
       human_answer = question.answers.where.not(author: 'System (AI-generated)').last
       #getting length of human answer and passing it to AI so the lengths are similar
-      #raise the number below to increase the length of the AI response
-      desired_length = (human_answer.text.length / 10.0).round
+      #LOWER the number below to INCREASE the length of the AI response
+      desired_length = (human_answer.text.length / 5.0).round
       GenerateAiAnswerJob.perform_later(question.id, ai_source.id, 'openai', desired_length)
     end
   end
