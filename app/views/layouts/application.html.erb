@@ -46,6 +46,7 @@
         <%= link_to "Approved", questions_path(status: "approved"), style: "margin-right: 1em;" %>
         <%= link_to "Rejected", questions_path(status: "rejected"), style: "margin-right: 1em;" %>
         <%= link_to "Pending", questions_path(status: "draft"), style: "margin-right: 1em;" %>
+        <%= link_to "No Images", questions_path(no_images: true), style: "margin-right: 1em;" %>
       </nav>
     <% end %>
 

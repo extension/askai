@@ -10,6 +10,11 @@ class QuestionsController < ApplicationController
     if params[:status].present?
       @questions = @questions.where(status: params[:status])
     end
+
+    if params[:no_images] == 'true'
+      @questions = @questions.without_images
+    end
+
     @questions = @questions.page(params[:page]).per(10)
   end
 
