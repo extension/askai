@@ -12,7 +12,7 @@ class QuestionsController < ApplicationController
     end
 
     if params[:no_images] == 'true'
-      @questions = @questions.without_images
+      @questions = @questions.where(image_present: false).where.not(status: ['approved', 'rejected'])
     end
 
     @questions = @questions.page(params[:page]).per(10)
