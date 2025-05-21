@@ -56,5 +56,12 @@ append :linked_files, '.env'
 # set :ssh_options, verify_host_key: :secure
 
 #restart puma each time you deploy
+set :puma_state, "#{shared_path}/tmp/pids/puma.state"
+set :puma_pid, "#{shared_path}/tmp/pids/puma.pid"
+set :puma_bind, "unix://#{shared_path}/tmp/sockets/puma.sock"
+set :puma_access_log, "#{shared_path}/log/puma.stdout.log"
+set :puma_error_log, "#{shared_path}/log/puma.stderr.log"
+
 after 'deploy:publishing', 'puma:restart'
+
 
