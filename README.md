@@ -41,11 +41,13 @@ To set up the application locally for development:
 1. Install dependencies:
 
    ```bash
+   rvm install 3.4.3
+   clone the repo
    bundle install
    yarn install
 	 rails db:create
 	 rails db:migrate
    -run "db:seed" to create sources and admin user
-   -run rails "import:questions[1000]"  to import Ask Extension questions (contact Mark Locklear for full question set); pass the number of questions you would like to import
+   -run rails "import:questions[100]"  to import Ask Extension questions (contact Mark Locklear for full question set); pass the number of questions you would like to import
    -run "rails dev:reset" to reset your database (when needed)
    -run " foreman start" to start sidekiq(used during ai answer generation) and run the rails server
