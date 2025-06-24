@@ -1,6 +1,8 @@
 # Ask AI
 
-**Ask AI** is a web-based application that uses real, human expert–answered questions from the **Ask Extension** knowledgebase to benchmark the performance of AI-generated responses against those provided by Cooperative Extension professionals.
+https://askai.extension.org/
+
+**Ask AI** is a web-based Ruby on Rails application that uses real, human expert–answered questions from the **Ask Extension** knowledgebase to benchmark the performance of AI-generated responses against those provided by Cooperative Extension professionals.
 
 ---
 
